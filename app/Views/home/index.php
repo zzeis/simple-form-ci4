@@ -7,7 +7,7 @@
 
 <div class="home">
 
-    <p class="text-center aviso"><i class="ri-alert-line"></i><br>Antes de se inscrever leia o decreto: <a  class='link' href="https://www.iguape.sp.gov.br/site/wp-content/uploads/2023/06/DECRETO_3_074.pdf">clique aqui</a></p>
+    <p class="text-center aviso"><i class="ri-alert-line"></i><br>Alert example</p>
 
     <div class="formulario w-72 sm:w-max lg:w-72 ">
         <form method="post" action="<?= base_url() ?>save">
