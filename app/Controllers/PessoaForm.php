@@ -19,8 +19,8 @@ class PessoaForm extends BaseController
         $estadoTenda = $this->request->getPost('estadoTenda');
         $cpfFormatado = $this->clearCpf_CNPJ($cpf);
         $cpfFormatado2 = preg_replace('/[^0-9]/', '', $cpf);
-     
-        
+
+
         $data = [
             'cpf' => $cpfFormatado,
             'nome' => $nome,
@@ -33,17 +33,17 @@ class PessoaForm extends BaseController
         $pessoa = new pessoaModel();
         if ($this->validaDocumento($cpfFormatado2)) {
             if ($pessoa->save($data)) {
-                $data['mensagem'] = 'Inscrição Enviada';
-                $data['mensagem2'] = 'Acesse o site <a class="link" href="https://www.iguape.sp.gov.br/site/">Prefeitura de Iguape</a> para mais informações';
-                $data['status'] = 'success';
+                $data['mensagem'] = 'title notificaion';
+                $data['mensagem2'] = 'info notification';
+                $data['status'] = 'success'; //simbol
                 $this->email($email, $nome, $cpf, $tipo, $quantidade);
             } else {
-                $data['mensagem'] = 'Erro ao registrar os dados';
-                $data['status'] = 'error';
+                $data['mensagem'] = 'Error';
+                $data['status'] = 'error'; //simbol
                 $data['errors'] = $pessoa->errors();
             }
         } else {
-            $data['errors'] = array('CPF ou CNPJ Invalido');
+            $data['errors'] = array('CPF Invalido');
         }
 
         echo view('header/index');
@@ -63,20 +63,17 @@ class PessoaForm extends BaseController
 
     public function email($emailParam, $nome, $cpf, $tipo, $quantidade)
     {
-
-
         //email 
         $emailUser = $emailParam;
         $email = \Config\Services::email();
-        $email->setFrom('seletivo@iguape.sp.gov.br', 'Prefeitura de Iguape');
+        $email->setFrom('example@gmail.com', 'NameEmail');
 
         $email->setTo("$emailUser");
-        //$email->setCC('another@another-example.com');
-        // $email->setBCC('them@their-example.com');
 
-        $email->setSubject('Confirmação - Sorteio - Festa do Bom Jesus De Iguape');
 
-        $message = "Inscrição Concluida: " . "$nome -" . " $cpf" . " $tipo" . "- $quantidade";
+        $email->setSubject('Title EMAIL');
+
+        $message = "Test email message";
         $email->setMessage($message);
 
 
@@ -130,64 +127,7 @@ class PessoaForm extends BaseController
             return true;
         }
 
-        // Valida CNPJ
-        if (strlen($documento) === 14) {
-            // Verifica se todos os dígitos são iguais
-            if ($this->validaCNPJ($documento)) {
-                return true;
-            }
-        }
 
         return false; // Documento inválido
-    }
-    function validaCNPJ($cnpj)
-    {
-        // Remove caracteres não numéricos
-        $cnpj = preg_replace('/[^0-9]/', '', $cnpj);
-
-        // Verifica se todos os dígitos são iguais
-        if (preg_match('/^(\d)\1+$/', $cnpj)) {
-            return false;
-        }
-
-        $soma = 0;
-        $multiplicador = 2;
-
-        // Cálculo do primeiro dígito verificador
-        for ($i = 11; $i >= 0; $i--) {
-            $soma += $cnpj[$i] * $multiplicador;
-            $multiplicador = ($multiplicador + 1) % 9;
-            if ($multiplicador < 2) {
-                $multiplicador += 2;
-            }
-        }
-
-        $resto = $soma % 11;
-        $digitoVerificador1 = ($resto < 2) ? 0 : 11 - $resto;
-
-        if ($cnpj[12] != $digitoVerificador1) {
-            return false;
-        }
-
-        $soma = 0;
-        $multiplicador = 2;
-
-        // Cálculo do segundo dígito verificador
-        for ($i = 12; $i >= 0; $i--) {
-            $soma += $cnpj[$i] * $multiplicador;
-            $multiplicador = ($multiplicador + 1) % 9;
-            if ($multiplicador < 2) {
-                $multiplicador += 2;
-            }
-        }
-
-        $resto = $soma % 11;
-        $digitoVerificador2 = ($resto < 2) ? 0 : 11 - $resto;
-
-        if ($cnpj[13] != $digitoVerificador2) {
-            return false;
-        }
-
-        return true;
     }
 }
