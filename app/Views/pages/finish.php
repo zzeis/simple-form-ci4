@@ -59,8 +59,8 @@
   
     <div class="">
         <p class="mensagem"><?= isset($mensagem2) ?
-                                '<i class="ri-alarm-warning-fill"></i> <br> Inscrição concluida! <br> Acesse o site <a class="link" href="https://www.iguape.sp.gov.br/site/">Prefeitura de Iguape</a> para mais informações!' :
-                                '<i class="ri-alarm-warning-fill"></i> <br>Por favor verifique sua inscrição <br>' . implode(", ", $errors)  ?></p>
+                                '<i class="ri-alarm-warning-fill"></i>' :
+                                '<i class="ri-alarm-warning-fill"></i> <br>Info: errors:' . implode(", ", $errors)  ?></p>
 
 
     </div>
