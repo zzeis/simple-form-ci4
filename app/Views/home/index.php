@@ -42,17 +42,17 @@
     </div>
 
     <div class="descricao">
-        <p class="title">Inscrição Para o Sorteio</p>
-        <p class="texto">Festa do Bom Jesus de Iguape 2023</p>
-        <p class="texto">Para mais informações acesse:<br> <a class='link' href="https://www.iguape.sp.gov.br/site/cidadao/festa-de-agosto/2023-2/">www.iguape.sp.gov.br</a></p>
+        <p class="title">Title example</p>
+        <p class="texto">Subtitle  example</p>
+        <p class="texto">Link or img</p>
 
         <ul class="social">
 
             <li>
-                <a href="https://www.facebook.com/search/top?q=munic%C3%ADpio%20de%20iguape"><i class="ri-facebook-circle-fill"></i></a>
+                <a href="#"><i class="ri-facebook-circle-fill"></i></a>
             </li>
             <li>
-                <a href="https://www.youtube.com/@PrefeituradeIguapeOficial"><i class="ri-youtube-line"></i></a>
+                <a href="#"><i class="ri-youtube-line"></i></a>
             </li>
 
 
